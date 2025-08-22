@@ -7,7 +7,7 @@ import { ArrowLeft } from "@/icons/components";
 // Styles
 import "./not-found-page.scss";
 
-export default function NotFoundPage() {
+export const NotFoundPage = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -36,4 +36,4 @@ export default function NotFoundPage() {
       </div>
     </section>
   );
-}
+};

@@ -3,7 +3,7 @@ import { lazy } from "react";
 // React Router
 import { createBrowserRouter, Navigate } from "react-router";
 // Pages
-import NotFoundPage from "@/pages/NotFoundPage/NotFoundPage";
+import { NotFoundPage } from "@/pages";
 const TasksPage = lazy(() =>
   import("@/pages").then((module) => ({
     default: module.TasksPage,

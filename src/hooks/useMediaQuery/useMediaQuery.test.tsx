@@ -18,23 +18,23 @@ describe("useMediaQuery", () => {
     jest.clearAllMocks();
   });
 
-  function addListener(listeners: Array<() => void>, cb: () => void) {
+  const addListener = (listeners: Array<() => void>, cb: () => void) => {
     listeners.push(cb);
-  }
+  };
 
-  function removeListener(listeners: Array<() => void>, cb: () => void) {
+  const removeListener = (listeners: Array<() => void>, cb: () => void) => {
     const idx = listeners.indexOf(cb);
     if (idx > -1) listeners.splice(idx, 1);
-  }
+  };
 
-  function dispatchChange(
+  const dispatchChange = (
     listeners: Array<() => void>,
     matchMediaMock: jest.Mock,
     newMatches: boolean
-  ) {
+  ) => {
     matchMediaMock.mock.results[0].value.matches = newMatches;
     listeners.forEach((cb) => cb());
-  }
+  };
 
   function setupMatchMedia(matches: boolean) {
     const listeners: Array<() => void> = [];
