@@ -21,7 +21,20 @@
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@types": ["./src/types/index.ts"],
+      "@types/*": ["./src/types/*"],
+      "@atoms/*": ["./src/ui/atoms/*"],
+      "@molecules/*": ["./src/ui/molecules/*"],
+      "@organisms/*": ["./src/ui/organisms/*"],
+      "@templates/*": ["./src/ui/templates/*"],
+      "@pages/*": ["./src/ui/pages/*"]
+    },
+    "types": ["vite/client", "node"]
   },
   "include": ["src"]
 }

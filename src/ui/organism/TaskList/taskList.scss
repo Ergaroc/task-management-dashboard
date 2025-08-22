@@ -1,0 +1,98 @@
+.o-task-list {
+  width: 100%;
+
+  &__grid {
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: repeat(3, 1fr);
+
+    @media (max-width: 1024px) {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: var(--space-4);
+    }
+  }
+
+  /* Columna / lane */
+  &__column {
+    background: var(--color-white);
+    border: var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-3);
+  }
+
+  &__column--to-do {
+    background: #eaf1ff;
+  }
+  &__column--in-progress {
+    background: #fbf2dd;
+  }
+  &__column--done {
+    background: #eaf7e9;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-3);
+  }
+
+  &__title {
+    font-size: var(--fs-700);
+    font-weight: 700;
+    margin: 0;
+  }
+
+  &__count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.6rem;
+    height: 1.4rem;
+    padding: 0 0.4rem;
+    border-radius: 999px;
+    background: var(--color-white);
+    border: var(--border);
+    font-size: var(--fs-300);
+  }
+
+  &__cards {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: var(--space-3);
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: var(--space-2);
+    scroll-snap-type: x proximity;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__item {
+    flex: 0 0 235px;
+    max-width: 235px;
+    min-width: 235px;
+    scroll-snap-align: start;
+  }
+
+  &--empty {
+    display: grid;
+    place-items: center;
+    padding: var(--space-6);
+    border: var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--color-gray-100);
+  }
+  &__empty-text {
+    color: var(--muted);
+    margin: 0;
+  }
+}

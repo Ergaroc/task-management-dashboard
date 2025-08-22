@@ -1,0 +1,20 @@
+.m-draggable-task {
+  height: 100%;
+  transition: box-shadow 0.15s ease, transform 0.05s ease;
+  border-radius: var(--radius-md);
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+
+  &:hover {
+    filter: brightness(0.99);
+  }
+  &:focus-within {
+    outline: none;
+  }
+
+  &--dragging {
+    opacity: 0.65;
+    pointer-events: none;
+  }
+}
