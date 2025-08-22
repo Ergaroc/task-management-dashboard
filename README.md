@@ -60,6 +60,8 @@ npm run preview
 
 npm run test
 
+```
+
 ---
 
 ## 🎨 Design Decisions & Trade-offs
@@ -122,8 +124,8 @@ This project uses [MSW (Mock Service Worker)](https://mswjs.io/) to mock API cal
 When you install and run MSW, it generates a **`mockServiceWorker.js`** file in your `public/` folder.
 
 ### How it works
+
 - MSW intercepts network requests at the **service worker layer**.
 - Instead of hitting a real backend, requests are resolved using **mock handlers** defined in the project (inside `/src/mocks`).
 - This allows us to develop and test the app in isolation, without depending on a live API.
 - The `mockServiceWorker.js` file is auto-generated and should be committed to the repo, as it’s required for MSW to work correctly in local dev and tests.
-```
