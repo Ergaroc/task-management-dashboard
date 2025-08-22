@@ -14,7 +14,7 @@ Senior Frontend Developer
 
 ## 🛠️ Tech Stack
 
-- **React 18** (with hooks and context)
+- **React 19** (with hooks and context)
 - **TypeScript** (strict typing for reliability)
 - **Vite** (fast bundling and DX)
 - **React Hook Form** (form state management)
