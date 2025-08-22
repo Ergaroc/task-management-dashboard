@@ -1,7 +1,13 @@
+// React
 import { StrictMode, Suspense } from "react";
+// React-DOM
 import { createRoot } from "react-dom/client";
+// React-router
 import { RouterProvider } from "react-router";
 import { router } from "@/app/router";
+// Atoms
+import { LoaderSpinner } from "./ui/atoms";
+// Styles
 import "@/styles/globals.scss";
 
 // MSW only for dev environment
@@ -13,7 +19,13 @@ if (import.meta.env.DEV) {
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Suspense fallback={<output>Cargando…</output>}>
+    <Suspense
+      fallback={
+        <output>
+          <LoaderSpinner size={64} />
+        </output>
+      }
+    >
       <RouterProvider router={router} />
     </Suspense>
   </StrictMode>

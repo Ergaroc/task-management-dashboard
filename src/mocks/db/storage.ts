@@ -1,4 +1,5 @@
-import type { Task } from "@types";
+// Type
+import type { Task } from "@/interfaces";
 
 const KEY = "tm.tasks.v1";
 

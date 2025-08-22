@@ -1,8 +1,11 @@
 .t-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
   &__header {
     background: var(--color-primary-900);
     padding: 1rem;
-    margin-bottom: var(--space-6);
   }
 
   &__nav {
@@ -48,6 +51,7 @@
   }
 
   &__main {
+    flex: 1;
     padding: 1rem;
   }
 

@@ -1,0 +1,20 @@
+.o-board-dnd {
+  width: 100%;
+
+  &__grid {
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: repeat(3, 1fr);
+
+    @media (max-width: 1024px) {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+
+  &__card-overlay {
+    transform: rotate(0.5deg);
+    filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.15));
+  }
+}

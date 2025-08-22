@@ -1,10 +1,46 @@
 .m-card {
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   gap: var(--space-4);
   padding: var(--space-4);
+  width: 100%;
+  box-sizing: border-box;
+  height: 100%;
+  overflow: hidden;
+  min-width: 0;
+
+  @media (max-width: 1024px) {
+    flex: 0 0 235px;
+    max-width: 235px;
+    min-width: 235px;
+    scroll-snap-align: start;
+  }
+
+  &:hover {
+    .m-card__drag-icon {
+      color: var(--color-primary-700);
+    }
+  }
+
+  &__drag-icon {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 0.5rem;
+    cursor: grab;
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      cursor: grabbing;
+    }
+  }
 
   &--low {
     @extend .m-card;
@@ -31,6 +67,9 @@
 
   &__title {
     font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   &__priority {
@@ -53,7 +92,21 @@
     color: var(--color-gray-500);
   }
 
+  &__description {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-width: 200px;
+    overflow-wrap: anywhere;
+  }
+
   &__description--no-details {
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
     color: var(--color-gray);
   }
 }

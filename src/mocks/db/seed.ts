@@ -1,7 +1,7 @@
-import type { Task, TaskPriority, TaskStatus } from "@types";
-
-const STATUSES: TaskStatus[] = ["To Do", "In Progress", "Done"];
-const PRIORITIES: TaskPriority[] = ["Low", "Medium", "High"];
+// Constants
+import { PRIORITIES, STATUSES } from "@/constants";
+// Interfaces
+import type { Task } from "@/interfaces";
 
 export const makeSeed = (count = 125): Task[] => {
   const now = new Date();

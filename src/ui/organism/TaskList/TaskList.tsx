@@ -1,18 +1,57 @@
-import { memo } from "react";
-import type { Task } from "@types";
-import "./TaskList.scss";
+// React
+import { useEffect, useMemo, useRef } from "react";
+// Molecules
 import { Card } from "@/ui/molecules";
+// Constants
+import { STATUSES } from "@/constants";
+// Interfaces
+import type { Task } from "@/interfaces";
+// Types
+import type { TaskStatus } from "@types";
+// Utils
+import {
+  makeTaskComparator,
+  type TaskSortField,
+  type TaskSortOrder,
+} from "@/utils";
+// Styles
+import "./TaskList.scss";
 
-interface TaskListProps {
+type Props = {
   tasks: Task[];
-  onEdit?: (id: string) => void;
-  onDelete?: (id: string) => void;
-}
+  sortField: TaskSortField;
+  sortOrder: TaskSortOrder;
+};
 
-const TaskList = ({ tasks }: TaskListProps) => {
-  const toDoTasks = tasks.filter((task) => task.status === "To Do");
-  const inProgressTasks = tasks.filter((task) => task.status === "In Progress");
-  const doneTasks = tasks.filter((task) => task.status === "Done");
+export const TaskList = ({ tasks, sortField, sortOrder }: Props) => {
+  const cmp = useMemo(
+    () => makeTaskComparator(sortField, sortOrder),
+    [sortField, sortOrder]
+  );
+
+  const groups = useMemo(() => {
+    const map: Record<TaskStatus, Task[]> = {
+      "To Do": [],
+      "In Progress": [],
+      Done: [],
+    };
+    for (const t of tasks) map[t.status].push(t);
+    STATUSES.forEach((s) => {
+      map[s] = map[s].slice().sort(cmp);
+    });
+    return map;
+  }, [tasks, cmp]);
+
+  const scrollers = useRef<Record<TaskStatus, HTMLDivElement | null>>({
+    "To Do": null,
+    "In Progress": null,
+    Done: null,
+  });
+  useEffect(() => {
+    STATUSES.forEach((s) =>
+      scrollers.current[s]?.scrollTo({ left: 0, behavior: "instant" as any })
+    );
+  }, [sortField, sortOrder, tasks.length]);
 
   if (!tasks.length) {
     return (
@@ -23,50 +62,40 @@ const TaskList = ({ tasks }: TaskListProps) => {
   }
 
   return (
-    <div className={`o-task-list`}>
-      <section
-        className="o-task-list__section--to-do"
-        aria-labelledby="todo-title"
-      >
-        <h2 className="o-task-list__title" id="todo-title">
-          To Do ({toDoTasks.length})
-        </h2>
-        <div className="o-task-list__cards">
-          {toDoTasks.map((task) => (
-            <Card key={task.id} {...task} />
-          ))}
-        </div>
-      </section>
+    <div className="o-task-list container">
+      <div className="o-task-list__grid">
+        {STATUSES.map((status) => (
+          <section
+            key={status}
+            className={`o-task-list__column o-task-list__column--${status
+              .toLowerCase()
+              .replace(" ", "-")}`}
+            aria-labelledby={`col-${status}`}
+          >
+            <header className="o-task-list__header">
+              <h2 id={`col-${status}`} className="o-task-list__title">
+                {status}
+              </h2>
+              <span className="o-task-list__count">
+                {groups[status].length}
+              </span>
+            </header>
 
-      <section
-        className="o-task-list__section--in-progress"
-        aria-labelledby="inprogress-title"
-      >
-        <h2 className="o-task-list__title" id="inprogress-title">
-          In Progress ({inProgressTasks.length})
-        </h2>
-        <div className="o-task-list__cards">
-          {inProgressTasks.map((task) => (
-            <Card key={task.id} {...task} />
-          ))}
-        </div>
-      </section>
-
-      <section
-        className="o-task-list__section--done"
-        aria-labelledby="done-title"
-      >
-        <h2 className="o-task-list__title" id="done-title">
-          Done ({doneTasks.length})
-        </h2>
-        <div className="o-task-list__cards">
-          {doneTasks.map((task) => (
-            <Card key={task.id} {...task} />
-          ))}
-        </div>
-      </section>
+            <div
+              className="o-task-list__cards"
+              ref={(el) => {
+                scrollers.current[status] = el;
+              }}
+            >
+              {groups[status].map((t) => (
+                <div key={t.id} className="o-task-list__item">
+                  <Card {...t} />
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
     </div>
   );
 };
-
-export default memo(TaskList);

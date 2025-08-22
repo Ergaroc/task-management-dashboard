@@ -1,19 +1,20 @@
+// Msw
 import { http, HttpResponse } from "msw";
+// Database
 import { loadTasks, saveTasks, resetTasks } from "./db/storage";
 import { makeSeed } from "./db/seed";
-import type { Task, TaskPriority, TaskStatus } from "@types";
+// Types
+import type { TaskPriority, TaskStatus } from "@types";
+// Interfaces
+import type { Task } from "@/interfaces";
+// Constants
+import { PRIORITY_ORDER } from "@/constants";
 
 const compareNullable = (a?: string, b?: string) => {
   if (!a && !b) return 0;
   if (!a) return 1;
   if (!b) return -1;
   return a.localeCompare(b);
-};
-
-const PRIORITY_ORDER: Record<TaskPriority, number> = {
-  Low: 0,
-  Medium: 1,
-  High: 2,
 };
 
 const applyFiltersAndSort = (tasks: Task[], req: Request): Task[] => {

@@ -1,4 +1,6 @@
+// React router
 import { Outlet, NavLink } from "react-router";
+// Styles
 import "./app-layout.scss";
 
 export const AppLayout = () => {
@@ -7,7 +9,7 @@ export const AppLayout = () => {
       <header className="t-root__header">
         <nav className="t-root__nav" aria-label="Main">
           <h1>
-            <NavLink to="/tasksitasS" className="t-root__link">
+            <NavLink to="/tasks" className="t-root__link">
               Task Management
             </NavLink>
           </h1>

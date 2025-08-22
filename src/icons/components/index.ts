@@ -1,6 +1,11 @@
+export { default as ArrowLeft } from "./ArrowLeft";
 export { default as ChevronDownDouble } from "./ChevronDownDouble";
 export { default as ChevronSelectorHorizontal } from "./ChevronSelectorHorizontal";
 export { default as ChevronUpDouble } from "./ChevronUpDouble";
 export { default as Close } from "./Close";
+export { default as Download } from "./Download";
+export { default as Drag } from "./Drag";
+export { default as Edit } from "./Edit";
+export { default as MoreVertical } from "./MoreVertical";
 export { default as PlusLarge } from "./PlusLarge";
 export { default as Trash } from "./Trash";
